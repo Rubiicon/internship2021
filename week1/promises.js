@@ -13,28 +13,28 @@ const getUsers = () => {
     });
 };
 
-getUsers()
+/* getUsers()
     .then((data) => {
         console.log(data);
     })
     .catch((error) => {
         throw new Error(error);
-    });
+    }); */
+
 
 // 1. Rewrite getUsers to async/await
 
-const getUsers2 = async () => {
-    await request(
-        'https://jsonplaceholder.typicode.com/users',
-        (error, response, body) => {
-            if (error || response.statusCode !== 200)
-                console.log('error:', error);
-            console.log(JSON.parse(body));
-        }
-    );
-};
+const asyncAwait = async ()=>{
+    try{
+        let result = await getUsers();
+        console.log(result);
+    } catch( error){
+        throw new Error(error);
+    }
+   
+}
 
-getUsers2();
+asyncAwait();
 
 /**
  *  2. Add another request to url - https://jsonplaceholder.typicode.com/comments.
@@ -98,7 +98,7 @@ promiseRace();
  * Try to use it on previous two requests
  */
 
-/* const promiseAny = () => {
+const promiseAny = () => {
     Promise.any([promiseA, promiseB])
         .then((data) => {
             console.log(data);
@@ -108,4 +108,4 @@ promiseRace();
         });
 };
 
-promiseAny(); */
+promiseAny();
